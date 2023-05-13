@@ -392,3 +392,61 @@ snippet asm
 	:
 	:
 	);
+## PonCAN specific snippets
+# PonCAN VPOL function template for master control with Doxygen documentation
+snippet vpolmaster
+	/************************************************************************************************
+	 *  @brief PonCAN VPOL API - vpol_$2
+	 *
+	 *      ${1:Detailed description of the function}
+	 *
+	 *  @param    masterId        Master Identifier to be manipulated.
+	 *  @param    *pV_MsgType     Structure on NMCI Message Type, will be returned to caller.
+	 *  @param    *pV_MeId        Structure on NMCI Message Identifier, will be returned to caller.
+	 *  @param    *pV_MsgBody     Structure on NMCI Message Body, will be returned to caller.
+	 *  @return   SUCCESS/FAIL
+	 ************************************************************************************************/
+	vpol_Result vpol_${2:function_name}(UINT8 masterId, 
+	                V_NMCI_MT_REQ_t *pV_MsgType, 
+	                V_NMCI_ME_ID_t  *pV_MeId, 
+	                UINT8           *pV_MsgBody})
+	{
+	    *pV_MsgType                         = MT_SET;
+	    pstMeId->entity_class               = ME_CLASS_ROOT;
+	    pstMeId->entity_instance.gen_ei     = masterId;
+
+	    ${3:// Fill the code here.}
+
+	    return ${4:SUCCESS/FAIL}
+	}
+
+
+# PonCAN VPOL function template for slave control with Doxygen documentation
+snippet vpolslave
+	/************************************************************************************************
+	 *  @brief PonCAN VPOL API - vpol_$2
+	 *
+	 *      ${1:Detailed description of the function}
+	 *
+	 *  @param    masterId        Master Identifier to be manipulated.
+	 *  @param    slaveId         Slave Identifier to be manipulated.
+	 *  @param    *pV_MsgType     Structure on NMCI Message Type, will be returned to caller.
+	 *  @param    *pV_MeId        Structure on NMCI Message Identifier, will be returned to caller.
+	 *  @param    *pV_MsgBody     Structure on NMCI Message Body, will be returned to caller.
+	 *  @return   SUCCESS/FAIL
+	 ************************************************************************************************/
+	vpol_Result vpol_${2:function_name}(UINT8 masterId, UINT8 slaveId, 
+	                V_NMCI_MT_REQ_t *pV_MsgType, 
+	                V_NMCI_ME_ID_t  *pV_MeId, 
+	                UINT8           *pV_MsgBody})
+	{
+	    *pV_MsgType                         = MT_SET;
+	    pstMeId->entity_class               = ME_CLASS_ROOT;
+	    pstMeId->entity_instance.gen_ei     = masterId;
+
+	    ${3:// Fill the code here.}
+
+	    return ${4:SUCCESS/FAIL}
+	}
+
+
