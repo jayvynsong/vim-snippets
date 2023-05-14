@@ -393,7 +393,7 @@ snippet asm
 	:
 	);
 ## PonCAN specific snippets
-# PonCAN VPOL function template for master control with Doxygen documentation
+# PonCAN VPOL function definition template for master control with Doxygen documentation
 snippet vpolmaster
 	/************************************************************************************************
 	 *  @brief PonCAN VPOL API - vpol_$2
@@ -417,11 +417,11 @@ snippet vpolmaster
 
 	    ${3:// Fill the code here.}
 
-	    return ${4:SUCCESS/FAIL}
+	    return SUCCESS;
 	}
 
 
-# PonCAN VPOL function template for slave control with Doxygen documentation
+# PonCAN VPOL function definition template for slave control with Doxygen documentation
 snippet vpolslave
 	/************************************************************************************************
 	 *  @brief PonCAN VPOL API - vpol_$2
