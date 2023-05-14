@@ -79,8 +79,8 @@ snippet el
 	}
 # else if
 snippet elif
-	else if (${1:true}) {
-		${0:${VISUAL}}
+			else if (${1:true}) {
+				${0:${VISUAL}}
 	}
 # ifi
 snippet ifi
@@ -395,7 +395,7 @@ snippet asm
 ## PonCAN specific snippets
 # PonCAN VPOL function definition template for master control with Doxygen documentation
 snippet vpolmaster
-	/************************************************************************************************
+	/**
 	 *  @brief PonCAN VPOL API - vpol_$2
 	 *
 	 *      ${1:Detailed description of the function}
@@ -405,17 +405,22 @@ snippet vpolmaster
 	 *  @param    *pV_MeId        Structure on NMCI Message Identifier, will be returned to caller.
 	 *  @param    *pV_MsgBody     Structure on NMCI Message Body, will be returned to caller.
 	 *  @return   SUCCESS/FAIL
-	 ************************************************************************************************/
-	vpol_Result vpol_${2:function_name}(UINT8 masterId, 
+	 */
+	vpol_Result vpol_${2:function_name}(UINT16 masterId, 
 	                V_NMCI_MT_REQ_t *pV_MsgType, 
 	                V_NMCI_ME_ID_t  *pV_MeId, 
-	                UINT8           *pV_MsgBody})
+	                UINT8           *pV_MsgBody)
 	{
-	    *pV_MsgType                         = MT_SET;
-	    pstMeId->entity_class               = ME_CLASS_ROOT;
-	    pstMeId->entity_instance.gen_ei     = masterId;
+	    *pV_MsgType                         = MT_${3:SET};
+	    pV_MeId->entity_class               = ME_CLASS_${4:ROOT};
+	    pV_MeId->entity_instance.gen_ei     = masterId;
 
-	    ${3:// Fill the code here.}
+	    // Fill pV_MsgBody here.
+	    // MeId
+	    pV_MsgBody[0] = ME_CLASS_$4>>8             & 0xff;
+	    pV_MsgBody[1] = ME_CLASS_$4                & 0xff;
+	    pV_MsgBody[2] = masterId>>8                & 0xff;
+	    pV_MsgBody[3] = masterId                   & 0xff;
 
 	    return SUCCESS;
 	}
@@ -423,7 +428,7 @@ snippet vpolmaster
 
 # PonCAN VPOL function definition template for slave control with Doxygen documentation
 snippet vpolslave
-	/************************************************************************************************
+	/**
 	 *  @brief PonCAN VPOL API - vpol_$2
 	 *
 	 *      ${1:Detailed description of the function}
@@ -434,17 +439,22 @@ snippet vpolslave
 	 *  @param    *pV_MeId        Structure on NMCI Message Identifier, will be returned to caller.
 	 *  @param    *pV_MsgBody     Structure on NMCI Message Body, will be returned to caller.
 	 *  @return   SUCCESS/FAIL
-	 ************************************************************************************************/
-	vpol_Result vpol_${2:function_name}(UINT8 masterId, UINT8 slaveId, 
+	 */
+	vpol_Result vpol_${2:function_name}(UINT16 masterId, UINT16 slaveId, 
 	                V_NMCI_MT_REQ_t *pV_MsgType, 
 	                V_NMCI_ME_ID_t  *pV_MeId, 
-	                UINT8           *pV_MsgBody})
+	                UINT8           *pV_MsgBody)
 	{
-	    *pV_MsgType                         = MT_SET;
-	    pstMeId->entity_class               = ME_CLASS_ROOT;
-	    pstMeId->entity_instance.gen_ei     = masterId;
+	    *pV_MsgType                         = MT_${3:SET};
+	    pV_MeId->entity_class               = ME_CLASS_${4:STD_GEN};
+	    pV_MeId->entity_instance.gen_ei     = masterId;
 
-	    ${3:// Fill the code here.}
+	    // Fill pV_MsgBody here.
+	    // MeId
+	    pV_MsgBody[0] = ME_CLASS_$4>>8             & 0xff;
+	    pV_MsgBody[1] = ME_CLASS_$4                & 0xff;
+	    pV_MsgBody[2] = masterId>>8                & 0xff;
+	    pV_MsgBody[3] = masterId                   & 0xff;
 
 	    return SUCCESS;
 	}
