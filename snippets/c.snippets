@@ -416,11 +416,11 @@ snippet vpolmaster
 	    pV_MeId->entity_instance.gen_ei     = masterId;
 
 	    // Fill pV_MsgBody here.
-	    // MeId
-	    pV_MsgBody[0] = ME_CLASS_$4>>8             & 0xff;
-	    pV_MsgBody[1] = ME_CLASS_$4                & 0xff;
-	    pV_MsgBody[2] = masterId>>8                & 0xff;
-	    pV_MsgBody[3] = masterId                   & 0xff;
+	    // 4-byte attribute mask
+	    pV_MsgBody[0] = 0x00; 
+	    pV_MsgBody[1] = 0x00; 
+	    pV_MsgBody[2] = 0x00; 
+	    pV_MsgBody[3] = 0x00; 
 
 	    return SUCCESS;
 	}
@@ -450,11 +450,11 @@ snippet vpolslave
 	    pV_MeId->entity_instance.gen_ei     = masterId;
 
 	    // Fill pV_MsgBody here.
-	    // MeId
-	    pV_MsgBody[0] = ME_CLASS_$4>>8             & 0xff;
-	    pV_MsgBody[1] = ME_CLASS_$4                & 0xff;
-	    pV_MsgBody[2] = masterId>>8                & 0xff;
-	    pV_MsgBody[3] = masterId                   & 0xff;
+	    // 4-byte attribute mask
+	    pV_MsgBody[0] = 0x00; 
+	    pV_MsgBody[1] = 0x00; 
+	    pV_MsgBody[2] = 0x00; 
+	    pV_MsgBody[3] = 0x00; 
 
 	    return SUCCESS;
 	}
